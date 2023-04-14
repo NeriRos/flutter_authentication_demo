@@ -1,48 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:flutter_authentication_demo/main.dart';
+import 'package:flutter_authentication_demo/src/pages/authentication.dart';
+import 'package:flutter_authentication_demo/src/pages/error.dart';
+import 'package:flutter_authentication_demo/src/pages/loading.dart';
+import 'package:flutter_authentication_demo/src/providers/authentication.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'home_page.dart';
+import 'pages/home.dart';
 
-class AuthApp extends StatelessWidget {
+class AuthApp extends ConsumerWidget {
   const AuthApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    var providers = [EmailAuthProvider()];
+  Widget build(BuildContext context, WidgetRef ref) {
+    final initialize = ref.watch(firebaseInitializerProvider);
 
-    var onAuthChange = AuthStateChangeAction(
-      ((context, state) {
-        if (state is UserCreated || state is SignedIn) {
-          var user = (state is SignedIn)
-              ? state.user
-              : (state as UserCreated).credential.user;
-          if (user == null) {
-            return;
-          }
-          if (!user.emailVerified && (state is UserCreated)) {
-            user.sendEmailVerification();
-          }
-          if (state is UserCreated) {
-            if (user.displayName == null && user.email != null) {
-              var defaultDisplayName = user.email!.split('@')[0];
-              user.updateDisplayName(defaultDisplayName);
-            }
-          }
 
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil('/', ((route) => false));
-        }
-      }),
-    );
-
-    return MaterialApp(
-      initialRoute: '/login',
-      routes: {
-        '/login': (context) {
-          return SignInScreen(providers: providers, actions: [onAuthChange]);
+    return initialize.when(
+        data: (data) {
+          return MaterialApp(
+            home: ref.watch(authStateProvider).when(
+                data: (data) {
+                  if (data != null) return const HomePage();
+                  return const AuthenticationPage();
+                },
+                loading: () => const LoadingScreen(),
+                error: (e, trace) => ErrorScreen(e, trace)),
+          );
         },
-        '/': (context) => const HomePage(),
-      },
-    );
+        error: (e, stackTrace) => ErrorScreen(e, stackTrace),
+        loading: () => const LoadingScreen());
   }
 }
