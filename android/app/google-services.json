@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "85142628252",
+    "project_id": "authentication-demo-e9533",
+    "storage_bucket": "authentication-demo-e9533.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85142628252:android:6de8f82dee5e3974fc0a59",
+        "android_client_info": {
+          "package_name": "coder.neri.authentication_demo.flutter_authentication_demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85142628252-b96g82rn6ekv38qq6himf0l64314693e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtM4wSMVvDRuxROqjp84-hgzK9fXbwDLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85142628252-b96g82rn6ekv38qq6himf0l64314693e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "85142628252-dks1cl3gkqoeqj3c4os78q8tuabdcuda.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "coder.neri.authenticationdemo.flutterAuthenticationDemo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
