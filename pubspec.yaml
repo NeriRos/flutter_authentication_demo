@@ -39,6 +39,7 @@ dependencies:
   firebase_auth: ^4.4.1
   firebase_ui_auth: ^1.2.1
   flutter_riverpod: ^2.3.4
+  easy_localization: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -62,3 +63,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  # To add assets to the application
+  assets:
+    - assets/translations/

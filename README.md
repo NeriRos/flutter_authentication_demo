@@ -20,3 +20,11 @@ A matching unit-test should be implemented.
 - Create a Nav Drawer with a button allowing to "switch language"
 - Keep the user logged-in upon refresh (use Riverpod to maintain the user state)
 - Create a unit-test for the login flow
+
+## HOW TO DEVELOP
+
+After editing locales use the following command:
+
+```bash
+flutter pub run easy_localization:generate -h
+```

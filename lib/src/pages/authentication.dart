@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_authentication_demo/src/pages/error.dart';
-import 'package:flutter_authentication_demo/src/pages/loading.dart';
+import 'package:flutter_authentication_demo/generated/locale_keys.g.dart';
 import 'package:flutter_authentication_demo/src/providers/authentication.dart';
+import 'package:flutter_authentication_demo/src/widgets/locale_switch.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 enum Status {
   login,
@@ -33,12 +34,9 @@ class AuthenticationPageState extends ConsumerState<AuthenticationPage> {
 
   @override
   Widget build(BuildContext context) {
-    var actionText = _status == Status.login ? 'Login' : 'Sign Up';
+    var actionText =
+        _status == Status.login ? LocaleKeys.login : LocaleKeys.register;
     var provider = ref.watch(authenticationProvider);
-
-    provider.authStateChange.listen((event) {
-      print(event);
-    });
 
     signIn() {
       provider.signInWithEmailAndPassword(
@@ -51,6 +49,10 @@ class AuthenticationPageState extends ConsumerState<AuthenticationPage> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title:  Text(LocaleKeys.app_title).tr(),
+        actions:  [LocaleSwitch()],
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: Form(
@@ -59,7 +61,7 @@ class AuthenticationPageState extends ConsumerState<AuthenticationPage> {
               width: 300,
               child: Column(
                 children: [
-                  Text(actionText),
+                  Text(actionText).tr(),
                   TextFormField(
                     controller: _emailController,
                     decoration: const InputDecoration(
@@ -115,7 +117,7 @@ class AuthenticationPageState extends ConsumerState<AuthenticationPage> {
                         }
                       }
                     },
-                    child: Text(actionText),
+                    child: Text(actionText).tr(),
                   ),
                   TextButton(
                     onPressed: () {

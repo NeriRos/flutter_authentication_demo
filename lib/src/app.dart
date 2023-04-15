@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_authentication_demo/main.dart';
 import 'package:flutter_authentication_demo/src/pages/authentication.dart';
@@ -15,10 +16,12 @@ class AuthApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final initialize = ref.watch(firebaseInitializerProvider);
 
-
     return initialize.when(
         data: (data) {
           return MaterialApp(
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
             home: ref.watch(authStateProvider).when(
                 data: (data) {
                   if (data != null) return const HomePage();
