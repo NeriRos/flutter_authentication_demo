@@ -26,5 +26,6 @@ A matching unit-test should be implemented.
 After editing locales use the following command:
 
 ```bash
-flutter pub run easy_localization:generate -h
+flutter pub run easy_localization:generate -S assets/translations -O lib/generated -o codegen_loader.g.dart
+flutter pub run easy_localization:generate -S assets/translations -O lib/generated -f keys -o locale_keys.g.dart
 ```

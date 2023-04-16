@@ -1,5 +1,14 @@
 {
-  "app_title": "Authentication",
+  "appTitle": "Authentication",
   "login": "Login",
-  "register": "Register"
+  "register": "Register",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm password",
+  "createAccount": "Create account",
+  "alreadyHaveAccount": "Already have an account?",
+  "signOut": "Sign out",
+  "noUser": "No user found",
+  "emailValidationMessage": "Enter your email",
+  "passwordValidationMessage": "Enter your password {}"
 }

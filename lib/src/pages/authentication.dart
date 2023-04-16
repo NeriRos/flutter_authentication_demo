@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_authentication_demo/generated/locale_keys.g.dart';
 import 'package:flutter_authentication_demo/src/providers/authentication.dart';
-import 'package:flutter_authentication_demo/src/widgets/locale_switch.dart';
+import 'package:flutter_authentication_demo/src/widgets/main_app_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -34,9 +34,11 @@ class AuthenticationPageState extends ConsumerState<AuthenticationPage> {
 
   @override
   Widget build(BuildContext context) {
-    var actionText =
-        _status == Status.login ? LocaleKeys.login : LocaleKeys.register;
+    var actionText = _status == Status.login
+        ? LocaleKeys.login.tr()
+        : LocaleKeys.register.tr();
     var provider = ref.watch(authenticationProvider);
+    var locale = context.locale;
 
     signIn() {
       provider.signInWithEmailAndPassword(
@@ -49,10 +51,7 @@ class AuthenticationPageState extends ConsumerState<AuthenticationPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title:  Text(LocaleKeys.app_title).tr(),
-        actions:  [LocaleSwitch()],
-      ),
+      appBar: MainAppBar(),
       body: Center(
         child: SingleChildScrollView(
           child: Form(
@@ -64,13 +63,17 @@ class AuthenticationPageState extends ConsumerState<AuthenticationPage> {
                   Text(actionText).tr(),
                   TextFormField(
                     controller: _emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
+                    decoration: InputDecoration(
+                      labelText: LocaleKeys.email.tr(),
                     ),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
+                      if (value == null ||
+                          value.isEmpty ||
+                          !value.contains("@") ||
+                          !value.contains(".")) {
+                        return LocaleKeys.emailValidationMessage.tr();
                       }
+
                       return null;
                     },
                   ),
@@ -79,12 +82,13 @@ class AuthenticationPageState extends ConsumerState<AuthenticationPage> {
                     enableSuggestions: false,
                     autocorrect: false,
                     controller: _passwordController,
-                    decoration: const InputDecoration(
-                      labelText: 'Password',
+                    decoration: InputDecoration(
+                      labelText: LocaleKeys.password.tr(),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
+                        return LocaleKeys.passwordValidationMessage
+                            .tr(args: [""]);
                       }
                       return null;
                     },
@@ -95,14 +99,15 @@ class AuthenticationPageState extends ConsumerState<AuthenticationPage> {
                       enableSuggestions: false,
                       autocorrect: false,
                       controller: _confirmPasswordController,
-                      decoration: const InputDecoration(
-                        labelText: 'Confirm Password',
+                      decoration: InputDecoration(
+                        labelText: LocaleKeys.confirmPassword.tr(),
                       ),
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
                             value != _passwordController.text) {
-                          return 'Please enter your password again';
+                          return LocaleKeys.passwordValidationMessage
+                              .tr(args: ["again"]);
                         }
                         return null;
                       },
@@ -117,7 +122,7 @@ class AuthenticationPageState extends ConsumerState<AuthenticationPage> {
                         }
                       }
                     },
-                    child: Text(actionText).tr(),
+                    child: Text(actionText),
                   ),
                   TextButton(
                     onPressed: () {
@@ -128,8 +133,8 @@ class AuthenticationPageState extends ConsumerState<AuthenticationPage> {
                       });
                     },
                     child: Text(_status == Status.login
-                        ? 'Create an account'
-                        : 'Already have an account?'),
+                        ? LocaleKeys.createAccount.tr()
+                        : LocaleKeys.alreadyHaveAccount.tr()),
                   ),
                 ],
               ),

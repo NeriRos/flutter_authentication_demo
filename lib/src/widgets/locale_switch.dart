@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +7,10 @@ class LocaleSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var locals = context.supportedLocales;
+
+    if (locals.isEmpty) {
+      return Container();
+    }
 
     onLanguageChange(locale) {
       context.setLocale(locale);

@@ -1,5 +1,14 @@
 {
-  "app_title": "התחברות",
+  "appTitle": "התחברות",
   "login": "התחברות",
-  "register": "הרשמה"
+  "register": "הרשמה",
+  "email": "אמייל",
+  "password": "סיסמה",
+  "confirmPassword": "אימות סיסמה",
+  "createAccount": "יצירת חשבון",
+  "alreadyHaveAccount": "כבר יש לך חשבון?",
+  "signOut": "התנתקות",
+  "noUser": "משתמש לא קיים",
+  "emailValidationMessage": "הכנס אמייל תקין",
+  "passwordValidationMessage": "הכנס סיסמה תקינה {}"
 }

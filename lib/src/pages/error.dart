@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class ErrorScreen extends StatelessWidget {
@@ -20,7 +22,7 @@ class ErrorScreen extends StatelessWidget {
           Text(
             e.toString(),
             style: const TextStyle(
-              fontSize: 14,
+              fontSize: 16,
             ),
           ),
           Text(
@@ -34,3 +36,4 @@ class ErrorScreen extends StatelessWidget {
     );
   }
 }
+
