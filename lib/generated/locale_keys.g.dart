@@ -13,5 +13,6 @@ abstract class  LocaleKeys {
   static const noUser = 'noUser';
   static const emailValidationMessage = 'emailValidationMessage';
   static const passwordValidationMessage = 'passwordValidationMessage';
+  static const signInWithGoogle = 'signInWithGoogle';
 
 }

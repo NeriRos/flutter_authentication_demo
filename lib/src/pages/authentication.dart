@@ -112,6 +112,36 @@ class AuthenticationPageState extends ConsumerState<AuthenticationPage> {
                         return null;
                       },
                     ),
+                  OutlinedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                      ),
+                    ),
+                    onPressed: () async {
+                      await provider.authenticateWithGoogle(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Image(
+                            image: AssetImage("assets/google_logo.png"),
+                            height: 20.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Text(LocaleKeys.signInWithGoogle.tr()),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {

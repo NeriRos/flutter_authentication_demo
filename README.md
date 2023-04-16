@@ -13,17 +13,27 @@ A matching unit-test should be implemented.
 
 ## REQUIREMENTS
 
-- Create a Firebase project
-- Create a login screen
-- Allow a user to login with Apple or Google (both should be supported)
-- Create a simple home screen with a Logout button
-- Create a Nav Drawer with a button allowing to "switch language"
-- Keep the user logged-in upon refresh (use Riverpod to maintain the user state)
-- Create a unit-test for the login flow
+1. [x] Create a Firebase project
+2. [x] Create a login screen
+3. [ ] Allow a user to login with Apple or Google (both should be supported)
+4. [x] Create a simple home screen with a Logout button
+5. [x] Create a Nav Drawer with a button allowing to "switch language"
+6. [x] Keep the user logged-in upon refresh (use Riverpod to maintain the user state)
+7. [ ] Create a unit-test for the login flow
+
+# THE SOLUTION
 
 ## HOW TO DEVELOP
 
-After editing locales use the following command:
+### Pre-requisites
+
+- Flutter
+- Dart
+- Flutterfire CLI
+
+### Locales
+
+After editing locales use the following commands:
 
 ```bash
 flutter pub run easy_localization:generate -S assets/translations -O lib/generated -o codegen_loader.g.dart

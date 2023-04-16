@@ -10,5 +10,6 @@
   "signOut": "התנתקות",
   "noUser": "משתמש לא קיים",
   "emailValidationMessage": "הכנס אמייל תקין",
-  "passwordValidationMessage": "הכנס סיסמה תקינה {}"
+  "passwordValidationMessage": "הכנס סיסמה תקינה {}",
+  "signInWithGoogle": "התחבר עם גוגל"
 }

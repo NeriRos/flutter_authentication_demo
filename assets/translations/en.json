@@ -10,5 +10,6 @@
   "signOut": "Sign out",
   "noUser": "No user found",
   "emailValidationMessage": "Enter your email",
-  "passwordValidationMessage": "Enter your password {}"
+  "passwordValidationMessage": "Enter your password {}",
+  "signInWithGoogle": "Sign in with Google"
 }

@@ -26,7 +26,8 @@ class CodegenLoader extends AssetLoader{
   "signOut": "Sign out",
   "noUser": "No user found",
   "emailValidationMessage": "Enter your email",
-  "passwordValidationMessage": "Enter your password {}"
+  "passwordValidationMessage": "Enter your password {}",
+  "signInWithGoogle": "Sign in with Google"
 };
 static const Map<String,dynamic> he = {
   "appTitle": "התחברות",
@@ -40,7 +41,8 @@ static const Map<String,dynamic> he = {
   "signOut": "התנתקות",
   "noUser": "משתמש לא קיים",
   "emailValidationMessage": "הכנס אמייל תקין",
-  "passwordValidationMessage": "הכנס סיסמה תקינה {}"
+  "passwordValidationMessage": "הכנס סיסמה תקינה {}",
+  "signInWithGoogle": "התחבר עם גוגל"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "he": he};
 }

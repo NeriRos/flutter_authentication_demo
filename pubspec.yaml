@@ -40,6 +40,7 @@ dependencies:
   firebase_ui_auth: ^1.2.1
   flutter_riverpod: ^2.3.4
   easy_localization: ^3.0.1
+  google_sign_in: ^6.1.0
 
 dev_dependencies:
   flutter_test:
@@ -66,3 +67,4 @@ flutter:
   # To add assets to the application
   assets:
     - assets/translations/
+    - assets/google_logo.png
