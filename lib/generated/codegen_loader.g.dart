@@ -15,14 +15,32 @@ class CodegenLoader extends AssetLoader{
   }
 
   static const Map<String,dynamic> en = {
-  "app_title": "Authentication",
+  "appTitle": "Authentication",
   "login": "Login",
-  "register": "Register"
+  "register": "Register",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm password",
+  "createAccount": "Create account",
+  "alreadyHaveAccount": "Already have an account?",
+  "signOut": "Sign out",
+  "noUser": "No user found",
+  "emailValidationMessage": "Enter your email",
+  "passwordValidationMessage": "Enter your password {}"
 };
 static const Map<String,dynamic> he = {
-  "app_title": "התחברות",
+  "appTitle": "התחברות",
   "login": "התחברות",
-  "register": "הרשמה"
+  "register": "הרשמה",
+  "email": "אמייל",
+  "password": "סיסמה",
+  "confirmPassword": "אימות סיסמה",
+  "createAccount": "יצירת חשבון",
+  "alreadyHaveAccount": "כבר יש לך חשבון?",
+  "signOut": "התנתקות",
+  "noUser": "משתמש לא קיים",
+  "emailValidationMessage": "הכנס אמייל תקין",
+  "passwordValidationMessage": "הכנס סיסמה תקינה {}"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "he": he};
 }
