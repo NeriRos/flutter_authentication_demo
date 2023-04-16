@@ -15,7 +15,7 @@ A matching unit-test should be implemented.
 
 1. [x] Create a Firebase project
 2. [x] Create a login screen
-3. [ ] Allow a user to login with Apple or Google (both should be supported)
+3. [x] Allow a user to login with Apple or Google (both should be supported)
 4. [x] Create a simple home screen with a Logout button
 5. [x] Create a Nav Drawer with a button allowing to "switch language"
 6. [x] Keep the user logged-in upon refresh (use Riverpod to maintain the user state)
