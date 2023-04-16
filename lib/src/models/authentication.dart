@@ -9,6 +9,8 @@ class Authentication {
 
   Stream<User?> get authStateChange => _auth.authStateChanges();
 
+  GoogleSignIn get _googleSignIn => GoogleSignIn();
+
   Future<void> signInWithEmailAndPassword(
       String email, String password, BuildContext context) async {
     try {
@@ -43,7 +45,7 @@ class Authentication {
 
   Future<void> authenticateWithGoogle(BuildContext context) async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
           await googleUser!.authentication;
       final credential = GoogleAuthProvider.credential(
