@@ -20,11 +20,9 @@ class HomePage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Center(
-                  child: TextButton(
-                      onPressed: provider.signOut,
-                      child: Text(LocaleKeys.signOut.tr())),
-                )
+                TextButton(
+                    onPressed: provider.signOut,
+                    child: Text(LocaleKeys.signOut.tr()))
               ],
             )
           : Center(child: Text(LocaleKeys.noUser.tr())),
