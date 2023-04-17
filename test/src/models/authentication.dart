@@ -7,19 +7,18 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class MockFirebaseAuth extends Mock implements FirebaseAuth {}
-
-class MockGoogleSignIn extends Mock implements GoogleSignIn {}
+class MockFirebaseAuth extends Mock implements FirebaseAuth {
+  @override
+  Future<MockUserCredential> signInWithCredential(
+      AuthCredential credential) async {
+    return MockUserCredential();
+  }
+}
 
 class MockUserCredential extends Mock implements UserCredential {}
 
 class TestAuthentication extends Authentication {
-  final GoogleSignIn _mockGoogleSignIn;
-
-  TestAuthentication(mockFirebaseAuth, this._mockGoogleSignIn)
-      : super(mockFirebaseAuth);
-
-  GoogleSignIn get _googleSignIn => _mockGoogleSignIn;
+  TestAuthentication(mockFirebaseAuth) : super(mockFirebaseAuth);
 
   useLocalEmulator() {
     auth.useAuthEmulator('localhost', 9099);
@@ -29,12 +28,10 @@ class TestAuthentication extends Authentication {
 void main() {
   late TestAuthentication auth;
   late MockFirebaseAuth mockFirebaseAuth;
-  late MockGoogleSignIn mockGoogleSignIn;
 
   setUp(() {
     mockFirebaseAuth = MockFirebaseAuth();
-    mockGoogleSignIn = MockGoogleSignIn();
-    auth = TestAuthentication(mockFirebaseAuth, mockGoogleSignIn);
+    auth = TestAuthentication(mockFirebaseAuth);
   });
 
   group("Authentication methods", () {
@@ -66,5 +63,28 @@ void main() {
       verify(() => mockFirebaseAuth.signInWithEmailAndPassword(
           email: email, password: password)).called(1);
     });
+
+    testWidgets('Sign in with google should work', (WidgetTester tester) async {
+      when(() => mockFirebaseAuth.signInWithCredential(any()))
+          .thenAnswer((_) async => MockUserCredential());
+
+      await tester.pumpWidget(MaterialApp(
+        home: Builder(
+          builder: (BuildContext context) {
+            return TextButton(
+              onPressed: () async {
+                await auth.authenticateWithGoogle(context);
+              },
+              child: const Text('Sign In'),
+            );
+          },
+        ),
+      ));
+
+      await tester.tap(find.byType(TextButton));
+      await tester.pumpAndSettle();
+
+      verify(() => mockFirebaseAuth.signInWithCredential(any())).called(1);
+    }, skip: true);
   });
 }

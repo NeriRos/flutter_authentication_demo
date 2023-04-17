@@ -7,8 +7,6 @@ class Authentication {
 
   Authentication(this.auth);
 
-  GoogleSignIn get _googleSignIn => GoogleSignIn();
-
   User? get user => auth.currentUser;
 
   Stream<User?> get authStateChange => auth.authStateChanges();
@@ -47,7 +45,7 @@ class Authentication {
 
   Future<void> authenticateWithGoogle(BuildContext context) async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication googleAuth =
           await googleUser!.authentication;
       final credential = GoogleAuthProvider.credential(
