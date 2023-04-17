@@ -14,20 +14,16 @@ class MockGoogleSignIn extends Mock implements GoogleSignIn {}
 class MockUserCredential extends Mock implements UserCredential {}
 
 class TestAuthentication extends Authentication {
-  final FirebaseAuth _mockFirebaseAuth;
   final GoogleSignIn _mockGoogleSignIn;
 
-  TestAuthentication(this._mockFirebaseAuth, this._mockGoogleSignIn);
+  TestAuthentication(mockFirebaseAuth, this._mockGoogleSignIn)
+      : super(mockFirebaseAuth);
 
-  @override
-  FirebaseAuth get _auth => _mockFirebaseAuth;
+  GoogleSignIn get _googleSignIn => _mockGoogleSignIn;
 
   useLocalEmulator() {
-    _auth.useAuthEmulator('localhost', 9099);
+    auth.useAuthEmulator('localhost', 9099);
   }
-
-  @override
-  GoogleSignIn get _googleSignIn => _mockGoogleSignIn;
 }
 
 void main() {
@@ -35,46 +31,40 @@ void main() {
   late MockFirebaseAuth mockFirebaseAuth;
   late MockGoogleSignIn mockGoogleSignIn;
 
-  setUpAll(() async {
-    TestWidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-    // auth.useLocalEmulator();
-  });
-
   setUp(() {
     mockFirebaseAuth = MockFirebaseAuth();
     mockGoogleSignIn = MockGoogleSignIn();
     auth = TestAuthentication(mockFirebaseAuth, mockGoogleSignIn);
   });
 
-  testWidgets('Sign in with username and password should work',
-      (WidgetTester tester) async {
-    const email = 'test@example.com';
-    const password = 'password';
+  group("Authentication methods", () {
+    testWidgets('Sign in with username and password should work',
+        (WidgetTester tester) async {
+      const email = 'test@example.com';
+      const password = 'password';
 
-    when(() => mockFirebaseAuth.signInWithEmailAndPassword(
-            email: any(named: 'email'), password: any(named: 'password')))
-        .thenAnswer((_) async => MockUserCredential());
+      when(() => mockFirebaseAuth.signInWithEmailAndPassword(
+              email: any(named: 'email'), password: any(named: 'password')))
+          .thenAnswer((_) async => MockUserCredential());
 
-    await tester.pumpWidget(MaterialApp(
-      home: Builder(
-        builder: (BuildContext context) {
-          return TextButton(
-            onPressed: () async {
-              await auth.signInWithEmailAndPassword(email, password, context);
-            },
-            child: const Text('Sign In'),
-          );
-        },
-      ),
-    ));
+      await tester.pumpWidget(MaterialApp(
+        home: Builder(
+          builder: (BuildContext context) {
+            return TextButton(
+              onPressed: () async {
+                await auth.signInWithEmailAndPassword(email, password, context);
+              },
+              child: const Text('Sign In'),
+            );
+          },
+        ),
+      ));
 
-    await tester.tap(find.byType(TextButton));
-    await tester.pumpAndSettle();
+      await tester.tap(find.byType(TextButton));
+      await tester.pumpAndSettle();
 
-    verify(() => mockFirebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password)).called(1);
+      verify(() => mockFirebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password)).called(1);
+    });
   });
 }
